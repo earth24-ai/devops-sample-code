@@ -7,6 +7,16 @@ pipeline {
                 echo 'Creating virtual environment and installing dependencies...'
             }
         }
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Creating virtual environment and installing 
+dependencies...'
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Running tests...'
@@ -26,7 +36,8 @@ pipeline {
             steps {
                 echo 'Running application...'
                 sh '''
-                nohup python3 ${WORKSPACE}/python-app-deploy/app.py > ${WORKSPACE}/python-app-deploy/app.log 2>&1 &
+                nohup python3 ${WORKSPACE}/python-app-deploy/app.py > 
+${WORKSPACE}/python-app-deploy/app.log 2>&1 &
                 echo $! > ${WORKSPACE}/python-app-deploy/app.pid
                 '''
             }
@@ -50,4 +61,3 @@ pipeline {
         }
     }
 }
-
